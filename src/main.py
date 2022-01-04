@@ -13,9 +13,9 @@ import play
 # variables
 amount_of_players = 2
 amount_of_card_in_hand = 3
-faces = ["2","3","4","5","6","7"]
+faces = [2,3,4,5,6,7,8,9,10,11,12,13,14]
 
-suits = ["hearts", "spades", "diamonds"]
+suits = ["hearts", "spades", "diamonds", "clubs"]
 suits_uni = ["\u2661", "\u2664", "\u2662"]
 
 deck_local = []
@@ -34,18 +34,32 @@ print(players)
 
 # For loop where the game goes through
 dropped_players = []
-while True:
+loop = True
+while loop:
     for player in players:
+        if player.hand == []:
+            continue
         played_card = player.hand[0]
         play.playCard(player, played_card, deck_local)
         play.draw(player,deck_local)
         # print(player.__dict__)
     play.winTable(players, deck_local)
+    # while True:
+    #     if deck_local.tiebreaker is not []:
+    #         for player in players:
+    #             if player.hand == []:
+    #                 continue
+    #             played_card = player.hand[0]
+    #             play.playCard(player, played_card, deck_local)
+    #             play.draw(player,deck_local)
+    #         play.tiebreakers(players, deck_local)
+        # else:
+        #     break
     for player in players:
+        if len(dropped_players) == len(players):
+            loop = False
         if player.hand == []:
             dropped_players.append(player.index)
-    if len(dropped_players) == len(players):
-        break
 for player in players:
     print(player.__dict__)
     

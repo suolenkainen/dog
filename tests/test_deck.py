@@ -5,7 +5,7 @@ import src.deck as deck
 class Deck(unittest.TestCase):
     def setUp(self):        
 
-        faces = ["2","3"]
+        faces = [2,3]
         suits = ["hearts", "spades"]
 
         self.deck = deck.Deck(suits, faces)
@@ -14,8 +14,8 @@ class Deck(unittest.TestCase):
                 
         # Test that deck creation works as intended and returns a deck
 
-        self.assertEqual(self.deck.cards, [('2', 'hearts'), ('3', 'hearts'), ('2', 'spades'), ('3', 'spades')])
-        self.assertEqual(self.deck.faces, ["2","3"])
+        self.assertEqual(self.deck.cards, [(2, 'hearts'), (3, 'hearts'), (2, 'spades'), (3, 'spades')])
+        self.assertEqual(self.deck.faces, [2,3])
         self.assertEqual(self.deck.suits, ["hearts", "spades"])
 
     
@@ -25,9 +25,16 @@ class Deck(unittest.TestCase):
 
         self.deck.shuffle(0)
 
-        self.assertEqual(self.deck.cards, [('2', 'hearts'), ('3', 'hearts'), ('3', 'spades')])
-        self.assertEqual(self.deck.trump, ('2', 'spades'))
+        self.assertEqual(self.deck.cards, [(2, 'hearts'), (3, 'hearts'), (3, 'spades')])
+        self.assertEqual(self.deck.trump, (2, 'spades'))
 
+
+    def test_score(self):
+
+        faces = [2,3,4]
+
+        self.deck.score(faces)
+        self.assertEqual(self.deck.scores, [[2], [3], [4]])
 
 if __name__ == '__main__':
     unittest.main()
