@@ -94,8 +94,9 @@ class Play(unittest.TestCase):
 
         play.winTable(players, self.deck)
         self.assertEqual(self.deck.table, [])
+        self.assertEqual(self.deck.tiebreaker, [[('4', 'hearts'), 0], [('4', 'spades'), 1], [('3', 'spades'), 2]])
         winning_player = players[0]
-        self.assertEqual(winning_player.stash, [('4', 'hearts'),('3', 'hearts'),('2', 'spades')])
+        self.assertEqual(winning_player.stash, [])
 
 
 if __name__ == '__main__':
