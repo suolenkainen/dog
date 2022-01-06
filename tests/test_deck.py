@@ -23,18 +23,11 @@ class Deck(unittest.TestCase):
 
         # Test that shuffle works correctly
 
-        self.deck.shuffle(0)
+        self.deck.shuffle()
 
         self.assertEqual(self.deck.cards, [(2, 'hearts'), (3, 'hearts'), (3, 'spades')])
         self.assertEqual(self.deck.trump, (2, 'spades'))
-
-
-    def test_score(self):
-
-        faces = [2,3,4]
-
-        self.deck.score(faces)
-        self.assertEqual(self.deck.scores, [[2], [3], [4]])
+        
 
 if __name__ == '__main__':
     unittest.main()

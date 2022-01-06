@@ -3,6 +3,7 @@
 import deck as dck
 import player as plr
 import play
+import gene as gn
 
 # # variables
 # faces = ["2","3","4","5","6","7","8","9","10","J","Q","K"]
@@ -20,13 +21,14 @@ suits_uni = ["\u2661", "\u2664", "\u2662"]
 
 deck_local = []
 deck_local = dck.Deck(suits, faces)
-deck_local.shuffle(0)
+deck_local.shuffle()
 print(deck_local.trump)
 
 players = []
 for i in range(amount_of_players):
     local_player = plr.Player()
     local_player.index = i
+    local_player.mutatePlayer()
     players.append(local_player)
 
 play.deal(players, deck_local)

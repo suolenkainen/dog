@@ -14,7 +14,7 @@ class Play(unittest.TestCase):
         faces = [2,3,4]
         suits = ["hearts", "spades"]
         self.deck = dck.Deck(suits,faces)
-        self.deck.shuffle(0)
+        self.deck.shuffle()
         
 
     def test_deal(self):
