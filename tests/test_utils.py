@@ -1,42 +1,16 @@
 import unittest
-import src.gene as gene
+import src.pool as pool
 import src.player as player
+import src.utils as utils
 import json
 
 
-class gene_tests(unittest.TestCase):
+class Utils(unittest.TestCase):
     def setUp(self):        
 
-        self.gene = gene.Gene()
-        self.pool = gene.Pool()
+        self.gene = player.Gene()
+        self.pool = pool.Pool()
         self.player = player.Player()
-
-
-    def test_createGene (self):
-                
-        self.assertEqual(self.gene.sink, 0)
-        self.assertEqual(self.gene.source, 0)
-        self.assertEqual(self.gene.weight, 0.0)
-        self.assertEqual(self.gene.enabled, True)
-        self.assertEqual(self.gene.innovation, 0)
-   
-
-    def test_createPool(self):
-        
-        self.assertEqual(self.pool.species, [])
-        self.assertEqual(self.pool.generation, 0)
-        self.assertEqual(self.pool.innovation, 4)
-        self.assertEqual(self.pool.currentSpecies, 1)
-        self.assertEqual(self.pool.currentPlayer, 1)
-        self.assertEqual(self.pool.currentFrame, 0)
-        self.assertEqual(self.pool.maxFitness, 0)
-
-    
-    def test_newInnovation(self):
-
-        innovation = gene.newInnovation()
-
-        self.assertEqual(innovation, 5)
 
     
     def test_disjoint_identical(self):
@@ -44,12 +18,12 @@ class gene_tests(unittest.TestCase):
         genes1 = []
         genes2 = []
         for n in range(3):
-            local_gene = gene.Gene()
+            local_gene = player.Gene()
             local_gene.innovation = n
             genes1.append(local_gene)
             genes2.append(local_gene)
 
-        result = gene.disjoint(genes1, genes2)
+        result = utils.disjoint(genes1, genes2)
         self.assertEqual(result, 0)
 
 
@@ -58,14 +32,14 @@ class gene_tests(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene1 = gene.Gene()
+        local_gene1 = player.Gene()
         local_gene1.innovation = 5
-        local_gene2 = gene.Gene()
+        local_gene2 = player.Gene()
         local_gene2.innovation = 6
         genes1.append(local_gene1)
         genes2.append(local_gene2)
 
-        result = gene.disjoint(genes1, genes2)
+        result = utils.disjoint(genes1, genes2)
         self.assertEqual(result, 2.0)
 
         
@@ -77,13 +51,13 @@ class gene_tests(unittest.TestCase):
         genes1 = []
         genes2 = []
         for n in range(1,4):
-            local_gene = gene.Gene()
+            local_gene = player.Gene()
             local_gene.weight = round(1/n,3)
             local_gene.innovation = n
             genes1.append(local_gene)
             genes2.append(local_gene)
 
-        result = gene.weights(genes1, genes2)
+        result = utils.weights(genes1, genes2)
         self.assertEqual(result, 0)
 
 
@@ -92,14 +66,14 @@ class gene_tests(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene1 = gene.Gene()
+        local_gene1 = player.Gene()
         local_gene1.innovation = 5
-        local_gene2 = gene.Gene()
+        local_gene2 = player.Gene()
         local_gene2.innovation = 6
         genes1.append(local_gene1)
         genes2.append(local_gene2)
 
-        result = gene.weights(genes1, genes2)
+        result = utils.weights(genes1, genes2)
         self.assertEqual(result, 1)
 
 
@@ -108,13 +82,13 @@ class gene_tests(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene0 = gene.Gene()
+        local_gene0 = player.Gene()
         local_gene0.innovation = 5
         local_gene0.weight = round(1/2,3)
-        local_gene1 = gene.Gene()
+        local_gene1 = player.Gene()
         local_gene1.innovation = 6
         local_gene1.weight = round(1/3,3)
-        local_gene2 = gene.Gene()
+        local_gene2 = player.Gene()
         local_gene2.innovation = 6
         local_gene2.weight = round(2/3,3)
 
@@ -122,22 +96,27 @@ class gene_tests(unittest.TestCase):
         genes1.append(local_gene1)
         genes2.append(local_gene2)
 
-        result = gene.weights(genes1, genes2)
+        result = utils.weights(genes1, genes2)
         self.assertEqual(result, 0.334)
 
 
     def test_sameSpecies(self):
+
+        confs = {}
+        confs["DeltaDisjoint"] = self.pool.DeltaDisjoint
+        confs["DeltaWeights"] = self.pool.DeltaWeights
+        confs["DeltaThreshold"] = self.pool.DeltaThreshold
         
         genes1 = []
         genes2 = []
     
-        local_gene0 = gene.Gene()
+        local_gene0 = player.Gene()
         local_gene0.innovation = 5
         local_gene0.weight = round(1,3)
-        local_gene1 = gene.Gene()
+        local_gene1 = player.Gene()
         local_gene1.innovation = 6
         local_gene1.weight = round(1/3,3)
-        local_gene2 = gene.Gene()
+        local_gene2 = player.Gene()
         local_gene2.innovation = 6
         local_gene2.weight = round(2/3,3)
 
@@ -152,8 +131,15 @@ class gene_tests(unittest.TestCase):
         player1.genes.append(local_gene1)
         player2.genes.append(local_gene2)
 
-        result = self.pool.sameSpecies(player1, player2)
+        result = utils.sameSpecies(confs, player1, player2)
         self.assertEqual(result,  False)
+
+
+    def test_newInnovation(self):
+
+        innovation = utils.newInnovation()
+
+        self.assertEqual(innovation, 8)
 
 
 if __name__ == '__main__':

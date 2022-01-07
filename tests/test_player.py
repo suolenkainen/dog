@@ -1,6 +1,6 @@
 import unittest
 import src.player as player
-import src.gene as gene
+import src.pool as pool
 import json
 
 
@@ -67,7 +67,7 @@ class Player(unittest.TestCase):
         
         self.player.mutationRates["step"] = 0.1
 
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.sink = 0
         local_gene.source = 0
         local_gene.weight = 0.0
@@ -116,7 +116,7 @@ class Player(unittest.TestCase):
 
     def test_randomNeuron_True_genes(self):
 
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.sink = 4
         local_gene.source = 57
         local_gene.weight = 0.0
@@ -130,7 +130,7 @@ class Player(unittest.TestCase):
 
     def test_containsLink_True(self):
 
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.sink = 4
         local_gene.source = 57
         local_gene.weight = 0.0
@@ -144,7 +144,7 @@ class Player(unittest.TestCase):
 
     def test_containsLink_False(self):
 
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.sink = 4
         local_gene.source = 57
         local_gene.weight = 0.0
@@ -157,7 +157,7 @@ class Player(unittest.TestCase):
 
     def test_copygene(self):
 
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.sink = 4
         local_gene.source = 57
         local_gene.weight = 0.0
@@ -181,7 +181,7 @@ class Player(unittest.TestCase):
 
     def test_nodeMutate(self):
         
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.sink = 1000004
         local_gene.source = 2
         local_gene.weight = 0.0
@@ -216,7 +216,7 @@ class Player(unittest.TestCase):
 
     def test_enabledDisableMutate_1False(self):
 
-        local_gene = gene.Gene()
+        local_gene = player.Gene()
         local_gene.enabled = False
         self.player.genes.append(local_gene)
         self.player.enableDisableMutate(True)
@@ -226,11 +226,11 @@ class Player(unittest.TestCase):
 
     def test_enabledDisableMutate_TrueFalse(self):
 
-        local_gene1 = gene.Gene()
+        local_gene1 = player.Gene()
         local_gene1.enabled = False
         self.player.genes.append(local_gene1)
         
-        local_gene2 = gene.Gene()
+        local_gene2 = player.Gene()
         local_gene2.enabled = True
         self.player.genes.append(local_gene2)
 

@@ -3,7 +3,7 @@
 import deck as dck
 import player as plr
 import play
-import gene as gn
+import src.pool as gn
 import json
 
 # # variables
@@ -76,6 +76,10 @@ for player in players:
     print(player.__dict__)
 
 
+# Run
+
+while True:
+    break
 
 
 

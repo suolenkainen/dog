@@ -1,5 +1,6 @@
 import random
-import src.gene as gn
+import src.pool as gn
+import src.utils as utils
 
 Inputs = 55
 Outputs = 4
@@ -121,7 +122,7 @@ class Player:
         neuron1 = self.randomNeuron(False)
         neuron2 = self.randomNeuron(True)
         
-        newLink = gn.Gene()
+        newLink = Gene()
         if neuron1 <= Inputs and neuron2 <= Inputs:
             # Both input nodes
             return
@@ -140,7 +141,7 @@ class Player:
         if self.containsLink(newLink):
             return
 
-        newLink.innovation = gn.newInnovation()
+        newLink.innovation = utils.newInnovation()
         newLink.weight = round(random.random()*4-2, 5)
         
         self.genes.append(newLink)
@@ -222,10 +223,19 @@ class Player:
     
     def copyGene(self, gene):
         # Copies a gene
-        local_gene = gn.Gene()
+        local_gene = Gene()
         local_gene.sink = gene.sink
         local_gene.source = gene.source
         local_gene.weight = gene.weight
         local_gene.enabled = gene.enabled
         local_gene.innovation = gene.innovation
         return local_gene
+
+
+class Gene:
+    def __init__(self):
+        self.sink = 0
+        self.source = 0
+        self.weight = 0.0
+        self.enabled = True
+        self.innovation = 0

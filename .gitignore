@@ -7,3 +7,5 @@ src/global.json
 conf/global.json
 src/__pycache__/gene.cpython-38.pyc
 src/__pycache__/species.cpython-38.pyc
+src/__pycache__/pool.cpython-38.pyc
+src/__pycache__/utils.cpython-38.pyc
