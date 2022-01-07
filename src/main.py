@@ -4,6 +4,7 @@ import deck as dck
 import player as plr
 import play
 import gene as gn
+import json
 
 # # variables
 # faces = ["2","3","4","5","6","7","8","9","10","J","Q","K"]
@@ -12,7 +13,7 @@ import gene as gn
 # suits_uni = ["\u2661", "\u2664", "\u2662", "\u2667"]
 
 # variables
-amount_of_players = 2
+amount_of_players = 10
 amount_of_card_in_hand = 3
 faces = [2,3,4,5,6,7,8,9,10,11,12,13,14]
 
@@ -24,10 +25,19 @@ deck_local = dck.Deck(suits, faces)
 deck_local.shuffle()
 print(deck_local.trump)
 
+pool = gn.Pool()
+for i in range(amount_of_players):
+    local_player = plr.Player()
+    local_player.index = i
+    local_player.seed = i
+    local_player.mutatePlayer()
+    pool.addToSpecies(local_player)
+
 players = []
 for i in range(amount_of_players):
     local_player = plr.Player()
     local_player.index = i
+    local_player.seed = i
     local_player.mutatePlayer()
     players.append(local_player)
 
@@ -64,5 +74,21 @@ while loop:
             dropped_players.append(player.index)
 for player in players:
     print(player.__dict__)
-    
+
+
+
+
+
+
+
+# Kun on päätetty, kuka on paras, se otetaan kaikille vastustajaksi. Käytännössä siis yks niistä pelaa kerran itseään vastaan
+
+
+with open('C:\dog\dog\conf\global.json') as f:
+    data = json.load(f)
+
+data["innovation"] = 4
+
+with open('C:\dog\dog\conf\global.json', 'w') as json_file:
+    json.dump(data, json_file)
     

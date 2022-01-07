@@ -116,7 +116,7 @@ class Player:
         # Generate a new link between nodes if there exists none yet
         # This essentially generates new genes
 
-        random.seed(0)
+        random.seed(self.seed)
 
         neuron1 = self.randomNeuron(False)
         neuron2 = self.randomNeuron(True)
@@ -149,7 +149,7 @@ class Player:
     def nodeMutate(self):
         # This generates a new node between two existing nodes that had connections
 
-        random.seed(0)
+        random.seed(self.seed)
         if self.genes == []:
             return
 
@@ -178,7 +178,7 @@ class Player:
     def enableDisableMutate(self, enable):
         #This chooses one gene and switches it to enabled or disabled
 
-        random.seed(0)
+        random.seed(self.seed)
 
         candidates = []
         for gene in self.genes:
@@ -197,7 +197,7 @@ class Player:
         # Choose any neuron that are existing by default (Inputs and Outputs) and
         # from those that are already existing in genes
 
-        random.seed(0)
+        random.seed(self.seed)
         
         m = MaxNodes +1
         neurons = list(range(m, m+Outputs))
