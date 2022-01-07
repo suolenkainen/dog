@@ -14,7 +14,7 @@ class Deck(unittest.TestCase):
                 
         # Test that deck creation works as intended and returns a deck
 
-        self.assertEqual(self.deck.cards, [(2, 'hearts'), (3, 'hearts'), (2, 'spades'), (3, 'spades')])
+        self.assertEqual(self.deck.cards, [[0, (2, 'hearts')], [1, (3, 'hearts')], [2, (2, 'spades')], [3, (3, 'spades')]])
         self.assertEqual(self.deck.faces, [2,3])
         self.assertEqual(self.deck.suits, ["hearts", "spades"])
 
@@ -25,8 +25,9 @@ class Deck(unittest.TestCase):
 
         self.deck.shuffle()
 
-        self.assertEqual(self.deck.cards, [(2, 'hearts'), (3, 'hearts'), (3, 'spades')])
-        self.assertEqual(self.deck.trump, (2, 'spades'))
+        self.assertEqual(self.deck.cards, [[0, (2, 'hearts')], [1, (3, 'hearts')], [3, (3, 'spades')]])
+        self.assertEqual(self.deck.trump, [2, (2, 'spades')])
+        self.assertEqual(self.deck.trumpsuit, "spades")
         
 
 if __name__ == '__main__':

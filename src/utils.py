@@ -66,3 +66,7 @@ def newInnovation():
         json.dump(data, json_file)
     
     return new_innovation
+
+
+def getInputs(player, deck):
+    pass

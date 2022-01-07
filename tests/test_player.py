@@ -32,7 +32,7 @@ class Player(unittest.TestCase):
         self.assertEqual(self.player.fitness, 0)
         self.assertEqual(self.player.adjustedFitness, 0)
         self.assertEqual(self.player.network, {})
-        self.assertEqual(self.player.maxneuron, 55)
+        self.assertEqual(self.player.maxneuron, 209)
         self.assertEqual(self.player.globalRank, 0)
         self.assertEqual(self.player.mutationRates["connections"], MutateConnectionsChance)
         self.assertEqual(self.player.mutationRates["link"], LinkMutationChance)
@@ -86,7 +86,7 @@ class Player(unittest.TestCase):
 
         self.assertEqual(self.player.genes[0].enabled, True)
         self.assertEqual(self.player.genes[0].innovation, 5)
-        self.assertEqual(self.player.genes[0].sink, 55)
+        self.assertEqual(self.player.genes[0].sink, 209)
         self.assertEqual(self.player.genes[0].source, 1000004)
         self.assertEqual(self.player.genes[0].weight, 1.03182)
 
@@ -97,7 +97,7 @@ class Player(unittest.TestCase):
 
         self.assertEqual(self.player.genes[0].enabled, True)
         self.assertEqual(self.player.genes[0].innovation, 6)
-        self.assertEqual(self.player.genes[0].sink, 51)
+        self.assertEqual(self.player.genes[0].sink, 95)
         self.assertEqual(self.player.genes[0].source, 1000004)
         self.assertEqual(self.player.genes[0].weight, 1.03182)
 
@@ -111,7 +111,7 @@ class Player(unittest.TestCase):
     def test_randomNeuron_false(self):
 
         result = self.player.randomNeuron(False)        
-        self.assertEqual(result, 51)
+        self.assertEqual(result, 95)
 
 
     def test_randomNeuron_True_genes(self):
@@ -125,7 +125,7 @@ class Player(unittest.TestCase):
         self.player.genes.append(local_gene)
 
         result = self.player.randomNeuron(False)        
-        self.assertEqual(result, 51)
+        self.assertEqual(result, 95)
 
 
     def test_containsLink_True(self):
@@ -191,18 +191,18 @@ class Player(unittest.TestCase):
 
         self.player.nodeMutate()
 
-        self.assertEqual(self.player.maxneuron, 56)
+        self.assertEqual(self.player.maxneuron, 210)
         self.assertEqual(self.player.genes[0].enabled, False)
 
         self.assertEqual(self.player.genes[1].enabled, True)
         self.assertEqual(self.player.genes[1].innovation, 13)
         self.assertEqual(self.player.genes[1].sink, 1000004)
-        self.assertEqual(self.player.genes[1].source, 56)
+        self.assertEqual(self.player.genes[1].source, 210)
         self.assertEqual(self.player.genes[1].weight, 1.0)
         
         self.assertEqual(self.player.genes[2].enabled, True)
         self.assertEqual(self.player.genes[2].innovation, 14)
-        self.assertEqual(self.player.genes[2].sink, 56)
+        self.assertEqual(self.player.genes[2].sink, 210)
         self.assertEqual(self.player.genes[2].source, 2)
         self.assertEqual(self.player.genes[2].weight, 0.0)
 

@@ -46,7 +46,6 @@ def winTable(players, deck):
 def tiebreakers(players, deck):
     deck.tiebreaker = []
 
-    
 
-
-#
+def getInputs(players, deck):
+    pass

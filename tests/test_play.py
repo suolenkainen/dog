@@ -20,7 +20,7 @@ class Play(unittest.TestCase):
     def test_deal(self):
 
         play.deal([self.player], self.deck)
-        self.assertEqual(self.player.hand, [(4, 'hearts'), (3, 'hearts'), (2, 'hearts')])
+        self.assertEqual(self.player.hand, [[2, (4, 'hearts')], [1, (3, 'hearts')], [0, (2, 'hearts')]])
 
 
     def test_draw_OK(self):

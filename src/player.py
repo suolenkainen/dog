@@ -2,7 +2,7 @@ import random
 import src.pool as gn
 import src.utils as utils
 
-Inputs = 55
+Inputs = [52,52, 52, 52, 1]
 Outputs = 4
 MaxNodes= 1000000
 
@@ -15,7 +15,7 @@ class Player:
         self.stash = []
         self.score = -10
         self.seed = 0
-        self.inputs = 55 #52 cards, bigger, smaller, bias
+        self.inputs = sum(Inputs)
         
         MutateConnectionsChance = 0.25
         LinkMutationChance = 2.0
@@ -31,7 +31,7 @@ class Player:
         self.fitness = 0
         self.adjustedFitness = 0
         self.network = {}
-        self.maxneuron = Inputs
+        self.maxneuron = sum(Inputs)
         self.globalRank = 0
         self.mutationRates = {}
         self.mutationRates["connections"] = MutateConnectionsChance
@@ -123,11 +123,11 @@ class Player:
         neuron2 = self.randomNeuron(True)
         
         newLink = Gene()
-        if neuron1 <= Inputs and neuron2 <= Inputs:
+        if neuron1 <= sum(Inputs) and neuron2 <= sum(Inputs):
             # Both input nodes
             return
 
-        if neuron2 <= Inputs:
+        if neuron2 <= sum(Inputs):
             # Swap output and input
             temp = neuron1
             neuron1 = neuron2
@@ -136,7 +136,7 @@ class Player:
         newLink.sink = neuron1
         newLink.source = neuron2
         if forceBias:
-            newLink.sink = Inputs
+            newLink.sink = sum(Inputs)
         
         if self.containsLink(newLink):
             return
@@ -165,13 +165,13 @@ class Player:
         gene1 = self.copyGene(gene)
         gene1.source = self.maxneuron
         gene1.weight = 1.0
-        gene1.innovation = gn.newInnovation()
+        gene1.innovation = utils.newInnovation()
         gene1.enabled = True
         self.genes.append(gene1)
         
         gene2 = self.copyGene(gene)
         gene2.sink = self.maxneuron
-        gene2.innovation = gn.newInnovation()
+        gene2.innovation = utils.newInnovation()
         gene2.enabled = True
         self.genes.append(gene2)
 
@@ -204,12 +204,12 @@ class Player:
         neurons = list(range(m, m+Outputs))
 
         if not nonInput:
-            neurons += list(range(1, Inputs+1))
+            neurons += list(range(1, sum(Inputs)+1))
         
         for gene in self.genes:
-            if (not nonInput) or gene.sink > Inputs:
+            if (not nonInput) or gene.sink > sum(Inputs):
                 neurons.append(gene.sink)
-            if (not nonInput) or gene.source > Inputs:
+            if (not nonInput) or gene.source > sum(Inputs):
                 neurons.append(gene.source)
 
         return neurons[random.randint(0,len(neurons)-1)]

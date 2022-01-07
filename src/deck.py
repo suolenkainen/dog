@@ -1,5 +1,6 @@
 import random
 
+
 class Deck:
     def __init__(self, suits, faces):
         self.seed = 0
@@ -12,13 +13,15 @@ class Deck:
         self.suits = suits
         self.faces = faces
 
+        i = 0
         for suit in suits:
             for card in faces:
-                self.cards.append((card, suit))
+                self.cards.append([i,(card, suit)])
+                i += 1
     
 
     def shuffle(self):
         random.seed(self.seed)
         random.shuffle(self.cards)
         self.trump = self.cards.pop(0)
-        self.trumpsuit = self.trump[1]
+        self.trumpsuit = self.trump[1][1]

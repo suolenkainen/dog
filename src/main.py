@@ -13,7 +13,7 @@ import json
 # suits_uni = ["\u2661", "\u2664", "\u2662", "\u2667"]
 
 # variables
-amount_of_players = 10
+amount_of_players = 2
 amount_of_card_in_hand = 3
 faces = [2,3,4,5,6,7,8,9,10,11,12,13,14]
 
@@ -85,7 +85,9 @@ while True:
 
 
 
-# Kun on päätetty, kuka on paras, se otetaan kaikille vastustajaksi. Käytännössä siis yks niistä pelaa kerran itseään vastaan
+# Kun on päätetty, kuka on paras, se otetaan kaikille vastustajaksi. 
+# Käytännössä siis yks niistä pelaa kerran itseään vastaan
+# Jos kortti on kädessä, siitä tulee positiivinen signaali, jos pöydässä, negatiivinen
 
 
 with open('C:\dog\dog\conf\global.json') as f:
