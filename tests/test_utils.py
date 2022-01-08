@@ -1,6 +1,6 @@
 import unittest
 import src.pool as pool
-import src.player as player
+import src.player as plr
 import src.utils as utils
 import json
 
@@ -8,9 +8,9 @@ import json
 class Utils(unittest.TestCase):
     def setUp(self):        
 
-        self.gene = player.Gene()
+        self.gene = plr.Gene()
         self.pool = pool.Pool()
-        self.player = player.Player()
+        self.player = plr.Player()
 
     
     def test_disjoint_identical(self):
@@ -18,7 +18,7 @@ class Utils(unittest.TestCase):
         genes1 = []
         genes2 = []
         for n in range(3):
-            local_gene = player.Gene()
+            local_gene = plr.Gene()
             local_gene.innovation = n
             genes1.append(local_gene)
             genes2.append(local_gene)
@@ -32,9 +32,9 @@ class Utils(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene1 = player.Gene()
+        local_gene1 = plr.Gene()
         local_gene1.innovation = 5
-        local_gene2 = player.Gene()
+        local_gene2 = plr.Gene()
         local_gene2.innovation = 6
         genes1.append(local_gene1)
         genes2.append(local_gene2)
@@ -51,7 +51,7 @@ class Utils(unittest.TestCase):
         genes1 = []
         genes2 = []
         for n in range(1,4):
-            local_gene = player.Gene()
+            local_gene = plr.Gene()
             local_gene.weight = round(1/n,3)
             local_gene.innovation = n
             genes1.append(local_gene)
@@ -66,9 +66,9 @@ class Utils(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene1 = player.Gene()
+        local_gene1 = plr.Gene()
         local_gene1.innovation = 5
-        local_gene2 = player.Gene()
+        local_gene2 = plr.Gene()
         local_gene2.innovation = 6
         genes1.append(local_gene1)
         genes2.append(local_gene2)
@@ -82,13 +82,13 @@ class Utils(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene0 = player.Gene()
+        local_gene0 = plr.Gene()
         local_gene0.innovation = 5
         local_gene0.weight = round(1/2,3)
-        local_gene1 = player.Gene()
+        local_gene1 = plr.Gene()
         local_gene1.innovation = 6
         local_gene1.weight = round(1/3,3)
-        local_gene2 = player.Gene()
+        local_gene2 = plr.Gene()
         local_gene2.innovation = 6
         local_gene2.weight = round(2/3,3)
 
@@ -110,13 +110,13 @@ class Utils(unittest.TestCase):
         genes1 = []
         genes2 = []
     
-        local_gene0 = player.Gene()
+        local_gene0 = plr.Gene()
         local_gene0.innovation = 5
         local_gene0.weight = round(1,3)
-        local_gene1 = player.Gene()
+        local_gene1 = plr.Gene()
         local_gene1.innovation = 6
         local_gene1.weight = round(1/3,3)
-        local_gene2 = player.Gene()
+        local_gene2 = plr.Gene()
         local_gene2.innovation = 6
         local_gene2.weight = round(2/3,3)
 
@@ -124,8 +124,8 @@ class Utils(unittest.TestCase):
         genes1.append(local_gene1)
         genes2.append(local_gene2)
 
-        player1 = player.Player()
-        player2 = player.Player()
+        player1 = plr.Player()
+        player2 = plr.Player()
 
         player1.genes.append(local_gene0)
         player1.genes.append(local_gene1)
@@ -140,6 +140,12 @@ class Utils(unittest.TestCase):
         innovation = utils.newInnovation()
 
         self.assertEqual(innovation, 8)
+
+
+    def test_sigmoid(self):
+
+        print(utils.sigmoid(0.1))
+        print(utils.sigmoid(1.0))
 
 
 if __name__ == '__main__':

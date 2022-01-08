@@ -2,8 +2,8 @@ import random
 import src.pool as gn
 import src.utils as utils
 
-Inputs = [52,52, 52, 52, 1]
-Outputs = 4
+Inputs = [52, 52, 52, 53, 2]
+Outputs = 4 # 0,1,2 are hand cards while 3 is a deck card
 MaxNodes= 1000000
 
 class Player:
@@ -16,6 +16,7 @@ class Player:
         self.score = -10
         self.seed = 0
         self.inputs = sum(Inputs)
+        self.next = True
         
         MutateConnectionsChance = 0.25
         LinkMutationChance = 2.0

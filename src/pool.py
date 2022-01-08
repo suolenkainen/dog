@@ -7,14 +7,16 @@ import src.utils as utils
 class Pool:
     def __init__(self):
         self.species = []
-        self.opponent = self.createOpponen()
         self.generation = 0
         self.innovation = 4
-        self.currentSpecies = 1
-        self.currentPlayer = 1
+        self.currentSpecies = 0
+        self.currentPlayer = 0
         self.currentOpponent = 1
         self.currentFrame = 0
         self.maxFitness = 0
+
+        self.createOpponen()
+        self.opponent = self.opponent
         
         self.DeltaDisjoint = 2.0
         self.DeltaWeights = 0.4

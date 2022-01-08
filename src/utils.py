@@ -1,4 +1,5 @@
 import json
+import math 
 
 
 def sameSpecies(confs, player1, player2):
@@ -68,5 +69,11 @@ def newInnovation():
     return new_innovation
 
 
-def getInputs(player, deck):
-    pass
+def sigmoid(x):
+
+    if x == 0:
+        return 0
+
+    result = 2 / (1 + math.log(4.9 * x)) - 1
+
+    return result
